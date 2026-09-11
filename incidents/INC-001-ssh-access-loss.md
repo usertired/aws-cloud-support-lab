@@ -14,7 +14,7 @@ Complete loss of terminal/administrative access to the instance. The AWS Console
 ## Investigation
 1. Confirmed the instance state was `running` via:
    ```
-   aws ec2 describe-instances --instance-ids i-02f59db42aeef082e --query "Reservations[0].Instances[0].[State.Name,PublicIpAddress]" --output table --profile personal
+   aws ec2 describe-instances --instance-ids i-******** --query "Reservations[0].Instances[0].[State.Name,PublicIpAddress]" --output table --profile personal
    ```
    Ruled out an instance-level failure (stopped/terminated instance, crashed OS, etc.).
 
@@ -31,9 +31,9 @@ The Security Group's inbound rule allowing SSH (port 22) from the authorized IP 
 
 ## Commands Used
 ```
-aws ec2 revoke-security-group-ingress --group-id sg-0f13daedb63caaebc --protocol tcp --port 22 --cidr <ip>/32 --profile personal
+aws ec2 revoke-security-group-ingress --group-id sg-*********** --protocol tcp --port 22 --cidr <ip>/32 --profile personal
 ssh -i "mi-primera-ec2.pem" ubuntu@<public-ip>
-aws ec2 authorize-security-group-ingress --group-id sg-0f13daedb63caaebc --protocol tcp --port 22 --cidr <ip>/32 --profile personal
+aws ec2 authorize-security-group-ingress --group-id sg-********* --protocol tcp --port 22 --cidr <ip>/32 --profile personal
 ```
 
 ## Resolution
